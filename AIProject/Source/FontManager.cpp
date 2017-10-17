@@ -4,7 +4,7 @@
 void FontManager::Init()
 {
 	sf::Font font;
-	font.loadFromFile("C:\\Users\\id915umz\\Desktop\\AISandbox\\AISandbox\\sansation.ttf");
+	font.loadFromFile("C:\\Users\\gianluca\\Documents\\AIProject\\AIProject\\Source\\AISandbox\\sansation.ttf");
 	m_fonts.insert(std::pair<FontEnum, sf::Font>(FontEnum::Font_Consola, font));
 }
 

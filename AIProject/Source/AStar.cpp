@@ -48,17 +48,17 @@ void AStar::CreateNodeAdj(const int iRow, const int iCol)
 	int upY= iCol -1;
 	int downY= iCol +1;
 
-	if (upY > 0) {
-		tRoot[nodePosition]->addAdjNode(tRoot[iRow*yMax+upY]);
+	if (upY >= 0) {
+		tRoot[nodePosition]->addAdjNode(tRoot[iRow*yMax + upY]);
 	}
-	if (upX < xMax) {
+	if (upX >= 0) {
 		tRoot[nodePosition]->addAdjNode(tRoot[upX*yMax + iCol]);
 	}
-	if (downY > yMax) {
+	if (downY < yMax) {
 		tRoot[nodePosition]->addAdjNode(tRoot[iRow*yMax + downY]);
 	}
-	if (upX > 0) {
-		tRoot[nodePosition]->addAdjNode(tRoot[upX*yMax + iCol]);
+	if (downX < xMax) {
+		tRoot[nodePosition]->addAdjNode(tRoot[downX*yMax + iCol]);
 	}
 }
 
@@ -100,45 +100,75 @@ void AStar::Search()
 
 Node* AStar::VisitNode()
 {
-	return nullptr;
+	Node* visitNode = qOpenList.front();
+	qOpenList.pop_front();
+	for (std::list<Node*>::iterator it = visitNode->adjNodes.begin(); it != visitNode->adjNodes.end(); it++)
+	{
+		AddNodeToOpenList(visitNode,(*it));
+	}
+	return visitNode;
 }
 
 void AStar::AddNodeToOpenList(Node* pParent, Node* pNode)
 {
-	if (pNode->nodeState==NodeState::Unknown) {
+	if (pNode->nodeState==NodeState::Unknown) 
+	{
 		pNode->parent = pParent;
 		
-		if (qOpenList.empty()) {
+		if (qOpenList.empty()) 
+		{
+			pNode->nodeState = NodeState::Open;
 			pNode->F = pNode->H;
 			qOpenList.push_back(pNode);
 		}
-		else {
+		else 
+		{
 			pNode->G = pParent->G + 1;
 			pNode->F = pNode->G + pNode->H;
-			for(std::list<Node*>::iterator it = qOpenList.begin(); it != qOpenList.end(); it++) {
-				if ((*it)->F>pNode->F) {
+			for(std::list<Node*>::iterator it = qOpenList.begin(); it != qOpenList.end(); it++) 
+			{
+				if ((*it)->F>pNode->F) 
+				{
 					pNode->nodeState = NodeState::Open;
 					qOpenList.insert(it, pNode);
 				}
 			}
-			if (pNode->nodeState == NodeState::Unknown) {
+			if (pNode->nodeState == NodeState::Unknown) 
+			{
 				pNode->nodeState = NodeState::Open;
 				qOpenList.push_back(pNode);
 			}
 		}
-		
 	}
-   //If pNode not in openList add to open
-   //else If pNode.cost < present.cost 
-		//Change cost and chage parent to pParent
+	else if (pNode->nodeState == NodeState::Open)
+	{
+		int newF = (pParent->G + 1) + pNode->H;
+		if (newF < pNode->F)
+		{
+			qOpenList.remove(pNode);
+			pNode->G = pParent->G + 1;
+			pNode->F = newF;
+			for (std::list<Node*>::iterator it = qOpenList.begin(); it != qOpenList.end(); it++)
+			{
+				if ((*it)->F>pNode->F)
+				{
+					qOpenList.insert(it, pNode);
+				}
+			}
+		}
+	}
 }
 
 void AStar::PrintPath(Node* pNode) const
 {
-    /*if(pNode.parent == nullptr)
-		std::cout<<pNode.state;;
-	PrintPath(pNode.parent);
-	std::cout<<pNode.state;*/
+
+	while (pNode!=nullptr)
+	{
+		//iRow*yMax + iCol
+		std::cout << ((pNode->x*yMax) + pNode->y)<<std::endl;
+		pNode = pNode->parent;
+	}
+
 }
 
 

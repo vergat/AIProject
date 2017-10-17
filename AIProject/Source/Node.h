@@ -17,9 +17,6 @@ public:
 	int H;
 	Node* parent;
 	NodeState nodeState;
-private:
-
-
 	std::list<Node*> adjNodes;
 };
 

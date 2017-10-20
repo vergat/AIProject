@@ -7,6 +7,7 @@ Node::Node(int m_x, int m_y) {
 	F = 0;
 	G = 0;
 	parent = nullptr;
+	route = false;
 }
 
 void Node::addAdjNode(Node * node)

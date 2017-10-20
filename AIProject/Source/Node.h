@@ -18,6 +18,7 @@ public:
 	Node* parent;
 	NodeState nodeState;
 	std::list<Node*> adjNodes;
+	bool route;
 };
 
 #endif /* defined(__AStar__Node__) */

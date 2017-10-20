@@ -9,12 +9,18 @@ class AStar
 {
 public:
     void Run();
-    
+	Node** GetGraph();
+	int GetxMax();
+	int GetyMax();
+	int GetStartNode();
+	int GetEndNode();
+	void Search();
+
 private:
     const static int xMax = 10;
     const static int yMax = 10;
     const static int iStartNode = 0;
-    const static int iEndNode = 99;
+    const static int iEndNode = 16;
     
     void CreateGraph();
     void CreateGraphAdjs();
@@ -25,15 +31,18 @@ private:
     
     void Clean();
     
-    void Search();
     Node* VisitNode();
     void AddNodeToOpenList(Node* pParent, Node* pNode);
     
     void PrintPath(Node* pNode) const;
     
-    Node* tRoot[xMax * yMax];
+
     
     std::list<Node*> qOpenList;
+
+	bool end = false;
+
+	Node* tRoot[xMax * yMax];
 };
 
 #endif /* defined(__AStar__AStar__) */

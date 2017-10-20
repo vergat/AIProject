@@ -10,10 +10,36 @@ void AStar::Run()
     CreateGraphAdjs();
     
     ComputeGraphHeuristics();
-    
+
+	AddNodeToOpenList(nullptr, tRoot[iStartNode]);
     Search();
     
     Clean();
+}
+
+Node** AStar::GetGraph()
+{
+	return &tRoot[0];
+}
+
+int AStar::GetxMax()
+{
+	return xMax;
+}
+
+int AStar::GetyMax()
+{
+	return yMax;
+}
+
+int AStar::GetStartNode()
+{
+	return iStartNode;
+}
+
+int AStar::GetEndNode()
+{
+	return iEndNode;
 }
 
 void AStar::CreateGraph()
@@ -86,14 +112,19 @@ void AStar::Clean()
 
 void AStar::Search()
 {
-	AddNodeToOpenList(nullptr, tRoot[iStartNode]);
-	Node* currentNode = nullptr;
+	if (!end)
+	{
+		Node* currentNode = nullptr;
 
-	while (!qOpenList.empty()) {
-		currentNode = VisitNode();
-		if (currentNode == tRoot[iEndNode]) {
-			PrintPath(currentNode);
-			break;
+		if (!qOpenList.empty()) 
+		{
+			currentNode = VisitNode();
+			if (currentNode == tRoot[iEndNode])
+			{
+				PrintPath(currentNode);
+				end = true;
+				return;
+			}
 		}
 	}
 }
@@ -166,6 +197,7 @@ void AStar::PrintPath(Node* pNode) const
 	{
 		//iRow*yMax + iCol
 		std::cout << ((pNode->x*yMax) + pNode->y)<<std::endl;
+		pNode->route = true;
 		pNode = pNode->parent;
 	}
 

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\AStarFifteen.cpp" />
+    <ClCompile Include="Source\NodeFifteen.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\AStar.cpp" />
     <ClCompile Include="Source\AStarScene.cpp" />
@@ -33,6 +35,10 @@
     <ClCompile Include="Source\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\BaseState.h" />
+    <ClInclude Include="Source\FSM.h" />
+    <ClInclude Include="Source\AStarFifteen.h" />
+    <ClInclude Include="Source\NodeFifteen.h" />
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\AStar.h" />
     <ClInclude Include="Source\AStarScene.h" />

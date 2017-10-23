@@ -74,16 +74,20 @@ void AStar::CreateNodeAdj(const int iRow, const int iCol)
 	int upY= iCol -1;
 	int downY= iCol +1;
 
-	if (upY >= 0) {
+	if (upY >= 0) 
+	{
 		tRoot[nodePosition]->addAdjNode(tRoot[iRow*yMax + upY]);
 	}
-	if (upX >= 0) {
+	if (upX >= 0)
+	{
 		tRoot[nodePosition]->addAdjNode(tRoot[upX*yMax + iCol]);
 	}
-	if (downY < yMax) {
+	if (downY < yMax) 
+	{
 		tRoot[nodePosition]->addAdjNode(tRoot[iRow*yMax + downY]);
 	}
-	if (downX < xMax) {
+	if (downX < xMax) 
+	{
 		tRoot[nodePosition]->addAdjNode(tRoot[downX*yMax + iCol]);
 	}
 }
@@ -107,7 +111,7 @@ void AStar::ComputeNodeHeuristic(Node* pNode)
 
 void AStar::Clean()
 {
-    
+    /*** TO DO ***/
 }
 
 void AStar::Search()
@@ -192,15 +196,12 @@ void AStar::AddNodeToOpenList(Node* pParent, Node* pNode)
 
 void AStar::PrintPath(Node* pNode) const
 {
-
 	while (pNode!=nullptr)
 	{
-		//iRow*yMax + iCol
 		std::cout << ((pNode->x*yMax) + pNode->y)<<std::endl;
 		pNode->route = true;
 		pNode = pNode->parent;
 	}
-
 }
 
 

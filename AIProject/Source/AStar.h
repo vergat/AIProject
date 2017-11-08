@@ -20,7 +20,7 @@ private:
     const static int xMax = 10;
     const static int yMax = 10;
     const static int iStartNode = 0;
-    const static int iEndNode = 16;
+    const static int iEndNode = 98;
     
     void CreateGraph();
     void CreateGraphAdjs();

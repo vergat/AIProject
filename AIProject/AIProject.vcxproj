@@ -19,7 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\EmptyLoadState.cpp" />
+    <ClCompile Include="Source\GoHomeState.cpp" />
+    <ClCompile Include="Source\GoMineState.cpp" />
+    <ClCompile Include="Source\IdleState.cpp" />
+    <ClCompile Include="Source\Miner.cpp" />
     <ClCompile Include="Source\AStarFifteen.cpp" />
+    <ClCompile Include="Source\MiningState.cpp" />
     <ClCompile Include="Source\NodeFifteen.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\AStar.cpp" />
@@ -32,12 +38,19 @@
     <ClCompile Include="Source\MainMenuScene.cpp" />
     <ClCompile Include="Source\MinerScene.cpp" />
     <ClCompile Include="Source\Node.cpp" />
+    <ClCompile Include="Source\SleepState.cpp" />
     <ClCompile Include="Source\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\EmptyLoadState.h" />
+    <ClInclude Include="Source\GoHomeState.h" />
+    <ClInclude Include="Source\GoMineState.h" />
+    <ClInclude Include="Source\IdleState.h" />
+    <ClInclude Include="Source\Miner.h" />
     <ClInclude Include="Source\BaseState.h" />
     <ClInclude Include="Source\FSM.h" />
     <ClInclude Include="Source\AStarFifteen.h" />
+    <ClInclude Include="Source\MiningState.h" />
     <ClInclude Include="Source\NodeFifteen.h" />
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\AStar.h" />
@@ -53,6 +66,7 @@
     <ClInclude Include="Source\Node.h" />
     <ClInclude Include="Source\NodeState.h" />
     <ClInclude Include="Source\SceneEnum.h" />
+    <ClInclude Include="Source\SleepState.h" />
     <ClInclude Include="Source\SteeringBehaviors.h" />
     <ClInclude Include="Source\Utils.h" />
     <ClInclude Include="Source\Vector2.h" />

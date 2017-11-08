@@ -1,12 +1,12 @@
 #pragma once
 
 #include "IScene.h"
-
+#include"Miner.h"
 
 class MinerScene : public IScene
 {
 public:
-
+	Miner * miner;
 	MinerScene();
 	virtual ~MinerScene();
     

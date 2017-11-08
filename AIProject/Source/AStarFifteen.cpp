@@ -6,41 +6,29 @@ void AStarFifteen::Run()
 
 int AStarFifteen::GetxMax()
 {
-	return 0;
+	return xMax;
 }
 
 int AStarFifteen::GetyMax()
 {
-	return 0;
+	return yMax;
 }
 
-std::list<int> AStarFifteen::GetStartNode()
+std::vector<int> AStarFifteen::GetStartNode()
 {
-	return std::list<int>();
+	return startState;
 }
 
-std::list<int> AStarFifteen::GetEndNode()
+std::vector<int> AStarFifteen::GetEndNode()
 {
-	return std::list<int>();
+	return endState;
 }
 
 void AStarFifteen::Search()
 {
 }
 
-void AStarFifteen::CreateGraph()
-{
-}
-
-void AStarFifteen::CreateGraphAdjs()
-{
-}
-
-void AStarFifteen::CreateNodeAdj(const int iRow, const int iCol)
-{
-}
-
-void AStarFifteen::ComputeGraphHeuristics()
+void AStarFifteen::CreateNodeAdj(NodeFifteen* node)
 {
 }
 

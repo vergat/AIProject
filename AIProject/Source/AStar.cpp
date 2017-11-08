@@ -139,8 +139,12 @@ Node* AStar::VisitNode()
 	qOpenList.pop_front();
 	for (std::list<Node*>::iterator it = visitNode->adjNodes.begin(); it != visitNode->adjNodes.end(); it++)
 	{
-		AddNodeToOpenList(visitNode,(*it));
+		if ((*it)->nodeState != NodeState::Closed)
+		{
+			AddNodeToOpenList(visitNode, (*it));
+		}
 	}
+	visitNode->nodeState = NodeState::Closed;
 	return visitNode;
 }
 
@@ -148,12 +152,15 @@ void AStar::AddNodeToOpenList(Node* pParent, Node* pNode)
 {
 	if (pNode->nodeState==NodeState::Unknown) 
 	{
-		pNode->parent = pParent;
-		
+		pNode->parent = pParent;	
 		if (qOpenList.empty()) 
 		{
 			pNode->nodeState = NodeState::Open;
-			pNode->F = pNode->H;
+			if (pParent != nullptr)
+			{
+				pNode->G = pParent->G + 1;
+			}
+			pNode->F = pNode->G + pNode->H;
 			qOpenList.push_back(pNode);
 		}
 		else 
@@ -162,10 +169,11 @@ void AStar::AddNodeToOpenList(Node* pParent, Node* pNode)
 			pNode->F = pNode->G + pNode->H;
 			for(std::list<Node*>::iterator it = qOpenList.begin(); it != qOpenList.end(); it++) 
 			{
-				if ((*it)->F>pNode->F) 
+				if ((*it)->F>=pNode->F) 
 				{
 					pNode->nodeState = NodeState::Open;
 					qOpenList.insert(it, pNode);
+					break;
 				}
 			}
 			if (pNode->nodeState == NodeState::Unknown) 
@@ -177,18 +185,26 @@ void AStar::AddNodeToOpenList(Node* pParent, Node* pNode)
 	}
 	else if (pNode->nodeState == NodeState::Open)
 	{
-		int newF = (pParent->G + 1) + pNode->H;
-		if (newF < pNode->F)
+		int newG = (pParent->G + 1);
+		if (newG < pNode->G)
 		{
 			qOpenList.remove(pNode);
-			pNode->G = pParent->G + 1;
-			pNode->F = newF;
+			pNode->G = newG;
+			pNode->F = newG+ (pNode->H);
+			pNode->nodeState = NodeState::Unknown;
 			for (std::list<Node*>::iterator it = qOpenList.begin(); it != qOpenList.end(); it++)
 			{
-				if ((*it)->F>pNode->F)
+				if ((*it)->F>=pNode->F)
 				{
+					pNode->nodeState = NodeState::Open;
 					qOpenList.insert(it, pNode);
+					break;
 				}
+			}
+			if (pNode->nodeState == NodeState::Unknown)
+			{
+				pNode->nodeState = NodeState::Open;
+				qOpenList.push_back(pNode);
 			}
 		}
 	}

@@ -11,7 +11,7 @@ void MiningState::Enter(Miner * agent)
 
 void MiningState::Tick(Miner * agent)
 {
-	if (agent->GetFatigue() > 0 && agent->GetLoad()<4)
+	if (agent->GetFatigue() > 0 && agent->GetLoad()<agent->GetMaxLoad())
 	{
 		agent->DecreaseFatigue();
 		agent->IncreaseLoad();
@@ -19,7 +19,7 @@ void MiningState::Tick(Miner * agent)
 	}
 	else
 	{
-		if (agent->GetLoad() >= 4)
+		if (agent->GetLoad() >= agent->GetMaxLoad())
 		{
 			std::cout << "I'm full with iron." << std::endl;
 		}

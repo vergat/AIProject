@@ -5,11 +5,13 @@
 class Miner
 {
 private:
-	int fatigue;
-	int load;
+	int m_maxFatigue;
+	int m_maxLoad;
+	int m_fatigue;
+	int m_load;
 	sf::Color colorState;
 public:
-	Miner();
+	Miner(int maxFatigue, int maxLoad);
 	~Miner();
 	FSM<Miner>* MachineState;
 
@@ -24,5 +26,7 @@ public:
 
 	int GetFatigue();
 	int GetLoad();
+	int GetMaxFatigue();
+	int GetMaxLoad();
 };
 

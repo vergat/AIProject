@@ -5,7 +5,7 @@
 
 void GoHomeState::Enter(Miner * agent)
 {
-	agent->SetColor(sf::Color::Yellow);
+	agent->SetColor(sf::Color::Magenta);
 }
 
 void GoHomeState::Tick(Miner * agent)

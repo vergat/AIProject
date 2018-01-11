@@ -1,37 +1,41 @@
 #include "Miner.h"
 #include "IdleState.h"
 
-Miner::Miner()
+Miner::Miner(int maxFatigue, int maxLoad)
 {
 	MachineState = new FSM<Miner>(this);
-	fatigue = 7;
-	load = 0;
+	m_maxFatigue = maxFatigue;
+	m_fatigue = maxFatigue;
+	m_maxLoad = maxLoad;
+	m_load = 0;
 	colorState = sf::Color::White;
 }
 
 
 Miner::~Miner()
 {
+	delete(MachineState);
+	MachineState = nullptr;
 }
 
 void Miner::IncreaseFatigue()
 {
-	fatigue++;
+	m_fatigue++;
 }
 
 void Miner::DecreaseFatigue()
 {
-	fatigue--;
+	m_fatigue--;
 }
 
 void Miner::IncreaseLoad()
 {
-	load++;
+	m_load++;
 }
 
 void Miner::DecreaseLoad()
 {
-	load--;
+	m_load--;
 }
 
 void Miner::SetColor(sf::Color color)
@@ -46,10 +50,20 @@ sf::Color Miner::GetColor()
 
 int Miner::GetFatigue()
 {
-	return fatigue;
+	return m_fatigue;
 }
 
 int Miner::GetLoad()
 {
-	return load;
+	return m_load;
+}
+
+int Miner::GetMaxFatigue()
+{
+	return m_maxFatigue;
+}
+
+int Miner::GetMaxLoad()
+{
+	return m_maxLoad;
 }

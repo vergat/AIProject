@@ -10,7 +10,7 @@ void SleepState::Enter(Miner * agent)
 
 void SleepState::Tick(Miner * agent)
 {
-	if (agent->GetFatigue() < 7)
+	if (agent->GetFatigue() < agent->GetMaxFatigue())
 	{
 		agent->IncreaseFatigue();
 		std::cout << "I'm sleeping" << std::endl;
